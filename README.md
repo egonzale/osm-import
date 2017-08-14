@@ -4,6 +4,10 @@ National Institute for Health and Welfare (THL) maintains a registry for all pub
 
 The data is available under the CC BY 4.0 license on the [Code Service](https://www.thl.fi/en/web/information-management-in-social-welfare-and-health-care/standardisation-of-data-and-requirements/code-service).
 
+### Permission to use the data ###
+
+National Institute for Heath and Welfare (THL) gives permission to use the data in OSM, provided they are listed as a data source on openstreetmap.org/copyright.
+
 ### Import ###
 
 Goal is to use the service provider information available from the registry (**name, address, provider type: social/healthcare**), geocode the addresses to coordinates, transform the data to JSOM format and import the set to OSM.
@@ -56,6 +60,7 @@ ifiedby="Lehtonen, Jari">
 </termitementry> 
 ```
 
+### Example import data ###
 This would be converted to something like this:
 
 ```

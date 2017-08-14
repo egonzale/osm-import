@@ -1,0 +1,25 @@
+{
+  "name": "parser",
+  "version": "0.0.1",
+  "description": "Parser for sote XML file",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node index.js"
+  },
+  "author": "tero.aijala@cinia.fi",
+  "license": "MIT",
+  "dependencies": {
+    "big-xml-streamer": "0.0.5",
+    "build-url": "^1.0.10",
+    "fs": "0.0.1-security",
+    "got": "^7.1.0",
+    "js2xmlparser": "^3.0.0",
+    "node-status": "^1.0.0",
+    "p-queue": "^1.1.0",
+    "promise-queue": "^2.2.3",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "xmlhttprequest": "^1.8.0"
+  }
+}

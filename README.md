@@ -2,7 +2,7 @@
 
 National Institute for Health and Welfare (THL) maintains a registry for all public and private social and health care providers.
 
-The data is available under the CC BY 4.0 license on the [Code Service](https://www.thl.fi/en/web/information-management-in-social-welfare-and-health-care/standardisation-of-data-and-requirements/code-service).
+The data is available under the CC BY 4.0 license on the [Code Service](https://www.thl.fi/en/web/information-management-in-social-welfare-and-health-care/standardisation-of-data-and-requirements/code-service) [1].
 
 ### Permission to use the data ###
 
@@ -11,6 +11,8 @@ National Institute for Heath and Welfare (THL) gives permission to use the data 
 ### Import ###
 
 Goal is to use the service provider information available from the registry (**name, address, provider type: social/healthcare**), geocode the addresses to coordinates, transform the data to JSOM format and import the set to OSM.
+
+Geocoding will be performed using the [Digitransit.fi -platform](https://digitransit.fi/en/developers/) [2].
 
 Some of the facilities already have been uploaded by various individuals and organisations. Target here is to make one definitive layer using the official registry data.
 
@@ -75,4 +77,10 @@ This would be converted to something like this:
 The imported data set would contain the addresses, names and type of each provider. 
 
 Type would be indicated as a tag, containing ``` amenity=social_facility ``` or ``` amenity=clinic ``` or a combination of these.
+
+### References ###
+
+[1] Code Service https://www.thl.fi/en/web/information-management-in-social-welfare-and-health-care/standardisation-of-data-and-requirements/code-service
+
+[2] Digitransit.fi https://digitransit.fi/en/developers/
 

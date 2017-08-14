@@ -19,7 +19,7 @@ errorLog.write("{\n");
 let prepend = "";
 
 // Cleanup routine
-nodeCleanup(function(exitCode, signal) {
+nodeCleanup((exitCode, signal) => {
     file.write('</osm>\n');
     errorLog.write("\n}");
 

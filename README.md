@@ -10,7 +10,7 @@ National Institute for Heath and Welfare (THL) gives permission to use the data 
 
 ### Import ###
 
-Goal is to use the service provider information available from the registry (**name, address, provider type: social/healthcare**), geocode the addresses to coordinates, transform the data to JSOM format and import the set to OSM.
+Goal is to use the service provider information available from the registry (**name, address, provider type: social/healthcare**), geocode the addresses to coordinates, transform the data to JOSM format and import the set to OSM.
 
 Geocoding will be performed using the [Digitransit.fi -platform](https://digitransit.fi/en/developers/) [2].
 

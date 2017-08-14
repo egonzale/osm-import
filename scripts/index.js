@@ -156,7 +156,7 @@ reader.on('record', function(record) {
 
                             let xmlObject = {
                                 '@': {
-                                    "id": (0 - geocodingResultCount),
+                                    "id": ((-1) - geocodingResultCount),
                                     "lat": jsItem.coordinates[1],
                                     "lon": jsItem.coordinates[0],
                                     "timestamp": jsItem.timestamp

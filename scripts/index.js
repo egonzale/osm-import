@@ -1,12 +1,11 @@
 const BigXml = require('big-xml-streamer');
-const RequestPromise = require('request-promise');
-const Util = require('util');
 const FileSystem = require('fs');
 const Js2XmlParser = require('js2xmlparser');
 const PQueue = require('p-queue');
 const BuildUrl = require('build-url');
 const queryUrl = "http://api.digitransit.fi/geocoding/v1/search";
 const got = require('got');
+const nodeCleanup = require('node-cleanup');
 
 let recordCount = 0;
 let geocodingResultCount = 0;
@@ -18,6 +17,19 @@ file.write("<?xml version='1.0' encoding='UTF-8'?>\n");
 file.write("<osm version='0.6' generator='JOSM'>\n");
 errorLog.write("{\n");
 let prepend = "";
+
+// Cleanup routine
+nodeCleanup(function(exitCode, signal) {
+    file.write('</osm>\n');
+    errorLog.write("\n}");
+
+    console.log("RECORD COUNT: " + recordCount);
+    console.log("RESULT COUNT: " + geocodingResultCount);
+    console.log("ERROR COUNT: " + geocodingErrorCount);
+}, {
+    ctrl_C: "{^C}",
+    uncaughtException: "Uh oh. Look what happened:"
+});
 
 let reader = BigXml.createReader('./input/sote.xml', 'termitementry', { gzip: false });
 
@@ -31,6 +43,7 @@ reader.on('record', function(record) {
 
     let children = record.children;
     let jsItem = {
+        originalId: "",
         address: "",
         postNumber: "",
         postOffice: "",
@@ -100,10 +113,6 @@ reader.on('record', function(record) {
             }
         });
 
-        let status = () => {
-            console.log('Pending ' + requestQueue.pendingPromises + '/' + requestQueue.maxPendingPromises + ' Queued ' + requestQueue.queue.length + '/' + requestQueue.maxQueuedPromises);
-        }
-
         if (requestQueue.size >= maxQueued) {
             console.log("PAUSING READER at: " + requestQueue.size);
             reader.paused = true;
@@ -116,7 +125,6 @@ reader.on('record', function(record) {
         }
 
         requestQueue.add(() => got(url)).then((result) => {
-
             if (result.body) {
                 try {
                     let response = JSON.parse(result.body);
@@ -159,6 +167,7 @@ reader.on('record', function(record) {
                                 xmlObject.tag[1] = { '@': { 'k': 'amenity', 'v': amenityString } };
                             }
                             file.write(Js2XmlParser.parse("node", xmlObject, options) + "\n");
+
                             geocodingResultCount++;
                         }
                     }
@@ -176,29 +185,3 @@ reader.on('record', function(record) {
         });
     }
 });
-process.stdin.resume(); //so the program will not close instantly
-
-function exitHandler(options, err) {
-    if (options.cleanup) { console.log("cleanup") };
-    if (err) console.log(err.stack);
-    if (options.exit) {
-        file.write('</osm>\n');
-        errorLog.write("\n}");
-
-        console.log("RECORD COUNT: " + recordCount);
-        console.log("RESULT COUNT: " + geocodingResultCount);
-        console.log("ERROR COUNT: " + geocodingErrorCount);
-
-        process.exit();
-    }
-
-}
-
-//do something when app is closing
-process.on('exit', exitHandler.bind(null, { cleanup: true }));
-
-//catches ctrl+c event
-process.on('SIGINT', exitHandler.bind(null, { exit: true }));
-
-//catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null, { exit: true }));

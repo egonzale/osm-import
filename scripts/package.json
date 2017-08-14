@@ -15,6 +15,7 @@
     "fs": "0.0.1-security",
     "got": "^7.1.0",
     "js2xmlparser": "^3.0.0",
+    "node-cleanup": "^2.1.2",
     "node-status": "^1.0.0",
     "p-queue": "^1.1.0",
     "promise-queue": "^2.2.3",

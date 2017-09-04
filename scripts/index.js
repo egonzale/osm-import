@@ -49,6 +49,9 @@ reader.on('record', function(record) {
         postOffice: "",
         shortName: "",
         name: "",
+        streetAddress: "",
+        country: "",
+        phone: "",
         timestamp: new Date(),
         isSocialServiceProvider: false,
         isSocialCareFacility: false,
@@ -72,6 +75,7 @@ reader.on('record', function(record) {
 
             if (item.hasOwnProperty("attrs") && item.hasOwnProperty("text")) {
                 let attrs = item.attrs;
+                jsItem.country = "FI"; // Hardcoded to Finland
 
                 if (attrs.type === "abbreviation") {
                     jsItem.shortName = item.text;
@@ -80,13 +84,16 @@ reader.on('record', function(record) {
                     jsItem.name = item.text;
                 }
                 if (attrs.type === "officestreetaddress") {
-                    jsItem.address = item.text;
+                    jsItem.streetAddress = item.text;
+                }
+                if (attrs.type === "officetelephone") {
+                    jsItem.phone = item.text;
                 }
                 if (attrs.type === "postnumber") {
                     jsItem.postNumber = item.text;
                 }
                 if (attrs.type === "postoffice") {
-                    jsItem.postOffice = item.text.toUpperCase();
+                    jsItem.postOffice = item.text;
                 }
                 if (attrs.type === "Terv.palveluyksikkö" && item.text === "T") {
                     jsItem.isHealthServiceProvider = true;
@@ -103,7 +110,7 @@ reader.on('record', function(record) {
             }
         }
 
-        let addressString = jsItem.address + "," + jsItem.postNumber + " " + jsItem.postOffice;
+        let addressString = jsItem.streetAddress + "," + jsItem.postNumber + " " + jsItem.postOffice;
         let encodedAddress = encodeURIComponent(addressString);
 
         let url = BuildUrl(queryUrl, {
@@ -161,10 +168,17 @@ reader.on('record', function(record) {
                                     "lon": jsItem.coordinates[0],
                                     "timestamp": jsItem.timestamp
                                 },
-                                'tag': [{ '@': { 'k': 'name', 'v': jsItem.name } }]
+                                'tag': [{ '@': { 'k': 'name', 'v': jsItem.name } },
+                                { '@': { 'k': 'addr:city', 'v': jsItem.postOffice } },
+                                { '@': { 'k': 'addr:street', 'v': jsItem.streetAddress } },
+                                { '@': { 'k': 'addr:postcode', 'v': jsItem.postNumber } },
+                                { '@': { 'k': 'addr:country', 'v': jsItem.country } }]
                             };
                             if (amenityString.length > 0) {
-                                xmlObject.tag[1] = { '@': { 'k': 'amenity', 'v': amenityString } };
+                                xmlObject.tag.push({ '@': { 'k': 'amenity', 'v': amenityString } });
+                            }
+                            if (jsItem.phone.length>0) {
+                                xmlObject.tag.push({ '@': { 'k': 'phone', 'v': jsItem.phone } });
                             }
                             file.write(Js2XmlParser.parse("node", xmlObject, options) + "\n");
 

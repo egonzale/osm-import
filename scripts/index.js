@@ -33,8 +33,8 @@ nodeCleanup((exitCode, signal) => {
 
 let reader = BigXml.createReader('./input/sote.xml', 'termitementry', { gzip: false });
 
-const maxConcurrent = 10;
-const maxQueued = 50;
+const maxConcurrent = 20;
+const maxQueued = 100;
 
 let requestQueue = new PQueue({ concurrency: maxConcurrent });
 
@@ -93,7 +93,7 @@ reader.on('record', function(record) {
                     jsItem.postNumber = item.text;
                 }
                 if (attrs.type === "postoffice") {
-                    jsItem.postOffice = item.text;
+                    jsItem.postOffice = item.text.charAt(0).toUpperCase() + item.text.slice(1).toLowerCase();
                 }
                 if (attrs.type === "Terv.palveluyksikkö" && item.text === "T") {
                     jsItem.isHealthServiceProvider = true;

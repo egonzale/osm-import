@@ -5,7 +5,13 @@ const PQueue = require('p-queue');
 const BuildUrl = require('build-url');
 const queryUrl = "http://api.digitransit.fi/geocoding/v1/search";
 const got = require('got');
+const commandLineArgs = require('command-line-args');
 const nodeCleanup = require('node-cleanup');
+
+const optionDefinitions = [{ name: 'city', type: String, multiple: false, defaultOption: false }];
+
+const cmdOptions = commandLineArgs(optionDefinitions); 
+console.dir(cmdOptions);
 
 let recordCount = 0;
 let geocodingResultCount = 0;
@@ -37,6 +43,18 @@ const maxConcurrent = 20;
 const maxQueued = 100;
 
 let requestQueue = new PQueue({ concurrency: maxConcurrent });
+
+let checkIfCitySetAndMatch = (city) => {
+    let returnValue = true;
+
+    if (cmdOptions && cmdOptions.city) {
+        if (cmdOptions.city.toUpperCase() !== city.toUpperCase()) {
+            returnValue = false;
+        }
+    }
+
+    return returnValue;
+}
 
 reader.on('record', function(record) {
     recordCount++;
@@ -110,6 +128,8 @@ reader.on('record', function(record) {
             }
         }
 
+        if (!checkIfCitySetAndMatch(jsItem.postOffice)) return;
+
         let addressString = jsItem.streetAddress + "," + jsItem.postNumber + " " + jsItem.postOffice;
         let encodedAddress = encodeURIComponent(addressString);
 
@@ -130,8 +150,8 @@ reader.on('record', function(record) {
             })
             reader.pause();
         }
-
-        requestQueue.add(() => got(url)).then((result) => {
+       
+            requestQueue.add(() => got(url)).then((result) => {
             if (result.body) {
                 try {
                     let response = JSON.parse(result.body);

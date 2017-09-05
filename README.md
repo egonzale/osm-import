@@ -68,9 +68,14 @@ This would be converted to something like this:
 ```
 <?xml version='1.0' encoding='UTF-8'?>
 <osm version='0.6' generator='JOSM'>
-<node id='-61' lat='60.189377' lon='24.83903' timestamp='2016-03-08T10:28:36'>
-    <tag k='name' v='COMPANY X and Y SERVICES'/>
-    <tag k='amenity' v='social_facility'/>
+<node id='-5' lat='62.651583' lon='29.335118' timestamp='2015-06-16T11:21:47'>
+    <tag k='name' v='Jampan Terveyspalvelu Oy'/>
+    <tag k='addr:city' v='Jäppilä'/>
+    <tag k='addr:street' v='Jäppilän valtatie 12'/>
+    <tag k='addr:postcode' v='00100'/>
+    <tag k='addr:country' v='FI'/>
+    <tag k='amenity' v='clinic'/>
+    <tag k='phone' v='0501234567'/>
 </node>
 ```
 

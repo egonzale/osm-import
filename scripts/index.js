@@ -56,6 +56,22 @@ let checkIfCitySetAndMatch = (city) => {
     return returnValue;
 }
 
+let getStreetFromAddress = (address) => {
+    let match = address.match(/\d+\.?\d*/);
+    let returnString = address;
+    if (match) {
+        let index = address.indexOf(match);
+        returnString = address.slice(0, index).trim();
+    }
+    return returnString;
+}
+
+let getNumberFromAddress = (address) => {
+    let street = getStreetFromAddress(address);
+    let returnString = address.substring(street.length).trim();
+    return returnString;
+}
+
 reader.on('record', function(record) {
     recordCount++;
 
@@ -68,6 +84,7 @@ reader.on('record', function(record) {
         shortName: "",
         name: "",
         streetAddress: "",
+        houseNumber: "",
         country: "",
         phone: "",
         timestamp: new Date(),
@@ -102,7 +119,8 @@ reader.on('record', function(record) {
                     jsItem.name = item.text;
                 }
                 if (attrs.type === "officestreetaddress") {
-                    jsItem.streetAddress = item.text;
+                    jsItem.streetAddress = getStreetFromAddress(item.text);
+                    jsItem.houseNumber = getNumberFromAddress(item.text);
                 }
                 if (attrs.type === "officetelephone") {
                     jsItem.phone = item.text;
@@ -191,6 +209,7 @@ reader.on('record', function(record) {
                                 'tag': [{ '@': { 'k': 'name', 'v': jsItem.name } },
                                 { '@': { 'k': 'addr:city', 'v': jsItem.postOffice } },
                                 { '@': { 'k': 'addr:street', 'v': jsItem.streetAddress } },
+                                { '@': { 'k': 'addr:housenumber', 'v': jsItem.houseNumber } },
                                 { '@': { 'k': 'addr:postcode', 'v': jsItem.postNumber } },
                                 { '@': { 'k': 'addr:country', 'v': jsItem.country } }]
                             };

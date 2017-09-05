@@ -77,7 +77,7 @@ reader.on('record', function(record) {
 
     let children = record.children;
     let jsItem = {
-        originalId: "",
+        oid: "",
         address: "",
         postNumber: "",
         postOffice: "",
@@ -100,7 +100,7 @@ reader.on('record', function(record) {
             jsItem.timestamp = record.attrs.lastmodifieddate;
         }
         if (record.attrs.id) {
-            jsItem.originalId = record.attrs.id;
+            jsItem.oid = record.attrs.id;
         }
     }
 
@@ -211,6 +211,7 @@ reader.on('record', function(record) {
                                 { '@': { 'k': 'addr:street', 'v': jsItem.streetAddress } },
                                 { '@': { 'k': 'addr:housenumber', 'v': jsItem.houseNumber } },
                                 { '@': { 'k': 'addr:postcode', 'v': jsItem.postNumber } },
+                                { '@': { 'k': 'oid', 'v': jsItem.oid } },
                                 { '@': { 'k': 'addr:country', 'v': jsItem.country } }]
                             };
                             if (amenityString.length > 0) {

@@ -1,0 +1,664 @@
+Received: from S13EXCH2.Corenet.local (10.51.32.17) by S13EXCH1.Corenet.local
+ (10.51.32.16) with Microsoft SMTP Server (TLS) id 15.0.1210.3 via Mailbox
+ Transport; Tue, 5 Sep 2017 15:36:35 +0300
+Received: from S13EXCH2.Corenet.local (10.51.32.17) by S13EXCH2.Corenet.local
+ (10.51.32.17) with Microsoft SMTP Server (TLS) id 15.0.1210.3; Tue, 5 Sep
+ 2017 15:36:35 +0300
+Received: from mta1-in.datacenter.fi (89.250.60.50) by S13EXCH2.Corenet.local
+ (10.51.32.17) with Microsoft SMTP Server (TLS) id 15.0.1210.3 via Frontend
+ Transport; Tue, 5 Sep 2017 15:36:35 +0300
+Authentication-Results: mta1.datacenter.fi; spf=None smtp.pra=antti.tuomi-nikula@thl.fi; spf=None smtp.mailfrom=antti.tuomi-nikula@thl.fi; spf=None smtp.helo=postmaster@emaila1.vy-verkko.fi
+Received-SPF: None (mta1.datacenter.fi: no sender authenticity
+  information available from domain of
+  antti.tuomi-nikula@thl.fi) identity=pra;
+  client-ip=185.74.174.132; receiver=mta1.datacenter.fi;
+  envelope-from="antti.tuomi-nikula@thl.fi";
+  x-sender="antti.tuomi-nikula@thl.fi";
+  x-conformance=sidf_compatible
+Received-SPF: None (mta1.datacenter.fi: no sender authenticity
+  information available from domain of
+  antti.tuomi-nikula@thl.fi) identity=mailfrom;
+  client-ip=185.74.174.132; receiver=mta1.datacenter.fi;
+  envelope-from="antti.tuomi-nikula@thl.fi";
+  x-sender="antti.tuomi-nikula@thl.fi";
+  x-conformance=sidf_compatible
+Received-SPF: None (mta1.datacenter.fi: no sender authenticity
+  information available from domain of
+  postmaster@emaila1.vy-verkko.fi) identity=helo;
+  client-ip=185.74.174.132; receiver=mta1.datacenter.fi;
+  envelope-from="antti.tuomi-nikula@thl.fi";
+  x-sender="postmaster@emaila1.vy-verkko.fi";
+  x-conformance=sidf_compatible
+IronPort-PHdr: =?us-ascii?q?9a23=3A47w0DhOJq6rnfodfs6Il6mtUPXoX/o7sNwtQ0KIM?=
+ =?us-ascii?q?zox0K/z5o8bcNUDSrc9gkEXOFd2CrakV26yO6+jJYi8p2d65qncMcZhBBVcuqP?=
+ =?us-ascii?q?49uEgeOvODElDxN/XwbiY3T4xoXV5h+GynYwAOQJ6tL1LdrWev4jEMBx7xKRR6?=
+ =?us-ascii?q?JvjvGo7Vks+7y/2+94fdbghMhzexe69+IAmrpgjNq8cahpdvJLwswRXTuHtIfO?=
+ =?us-ascii?q?pWxWJsJV2Nmhv3+9m98p1+/SlOovwt78FPX7n0cKQ+VrxYES8pM3sp683xtBnM?=
+ =?us-ascii?q?VhWA630BWWgLiBVIAgzF7BbnXpfttybxq+Rw1DWGMcDwULs5Qiqp4bt1RxD0iS?=
+ =?us-ascii?q?cHLz85/3/Risxsl6JQvRatqwViz4LIfI2ZMfxzdb7fc9wHX2pMRsZfWTJcDIOg?=
+ =?us-ascii?q?YYUBDOQBMuREoIbyvFYOtweyBQy2Ce/z1jNFhnn71rA63eQ7FgHG2RQtEcwTsH?=
+ =?us-ascii?q?TTqdX1Nb4eX/i0zKnL0DXDa+lZ0irh5YjObhAhvfCMVq93fMXLz0kvCx/FjlSK?=
+ =?us-ascii?q?pYz5IjOV0eENs2mC4+pmVOKviHMnqwVrrTW02scsio3JipgbylDF7Ch0xps+K9?=
+ =?us-ascii?q?O/SE5+e9GkEZ1QujmGN4t2RsMuWW9ouCcixr0BoZ60Yi4KyI87xx7FdfOIbZSI?=
+ =?us-ascii?q?4hf5W+aJOzt4g2hleL2nixms6kig0ur8Vs6u3FZErypJitzMuWoX2BzV78iHS+?=
+ =?us-ascii?q?d9/lu71jaSzADT7vtLIUEolarcMJ4t2LAwlpsLvUvfHy/2nkT2g7WMekUq++ik?=
+ =?us-ascii?q?8+PnYq34qZ+aKoB7kB3+Pb4ylcy4BOQ4Nw8OX26A+eim073j50L5TbNXhfM1iq?=
+ =?us-ascii?q?nUqI3WKMcbq6KjAQJY3Zwv5wu9AjqpytgUgHcKIExddBKJkYfkOE3CLfX9APui?=
+ =?us-ascii?q?n1ihkypnyvXFM7DjAJjBM33OnbT9crlj5U5RzQU+wNRe6p1KDLwKPej9VVXrtN?=
+ =?us-ascii?q?PCCx80Kwy0zPjjCNV6zo4RR2ePDbWYMKPWq1CE+/gjI/eMZYMMpjbyNeIl5/3t?=
+ =?us-ascii?q?jX8+g1Mdc6ip0YMWaHC+APtmP12UbWfvj9oBC2sHvAUzQPb3hFCAXjNffWu+Uq?=
+ =?us-ascii?q?wi6j0jDYKpF4bDRoSjgLyb2ye7G4VbaXpAClCQDXfodp+IW+sRaCKVJ89hkyUI?=
+ =?us-ascii?q?Vb6gS48iyBGusBX1xqF7LurU/i0Ur5zj1Nlt6+3JiR4y7SB0D9ia02yVUW97gH?=
+ =?us-ascii?q?kIRzgs0K9loEx9yE2M0axijPFDCdNT5vVJUgYgOpLGwex6CoO6ZgWU0taLxFIq?=
+ =?us-ascii?q?demrGzZ5Gu482dhIakd/EtGrphvC2SujRbEUwe+lHpsxp57B2H3wYuB8yGvC3e?=
+ =?us-ascii?q?EIiUU6Q4MbPGu6mq856xXUAo+MlUSaiqKjXbgc2GjD9THQniK1oEhEXVsoAu3+?=
+ =?us-ascii?q?VncFax6T9Iyh6w=3D=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A0DiAABcma5ZgISuSrlbAxkBAQEBAQEBA?=
+ =?us-ascii?q?QEBAQcBAQEBARQBAQEBAQEBAQEBAQcBAQEBAYJmgS2BDgcBjwqRHZEiIIR0ggQ?=
+ =?us-ascii?q?HAQIlhRkChHIUAQEBAQEBAQEBAQESAQELCwkIJjGCMyQBgkABAQEBAwUBBgwNC?=
+ =?us-ascii?q?RswEAIBBgIRBAEBBgEBHAQHAgUQGxQJCAIEDgUJBQ2KFwMBBAeTF6ANi1gBAQE?=
+ =?us-ascii?q?BAQEBAQEBAQEBAQEBAQEBAQEOD4I0doUzK4J9hDpSCh0JgnyCMQWRJ4cNiECGW?=
+ =?us-ascii?q?gGBAI9jkASMVTSHdQIDCwIZgTk2fDIyIYEUAYI8gkkcGYFOdosUAQEB?=
+X-IPAS-Result: =?us-ascii?q?A0DiAABcma5ZgISuSrlbAxkBAQEBAQEBAQEBAQcBAQEBARQ?=
+ =?us-ascii?q?BAQEBAQEBAQEBAQcBAQEBAYJmgS2BDgcBjwqRHZEiIIR0ggQHAQIlhRkChHIUA?=
+ =?us-ascii?q?QEBAQEBAQEBAQESAQELCwkIJjGCMyQBgkABAQEBAwUBBgwNCRswEAIBBgIRBAE?=
+ =?us-ascii?q?BBgEBHAQHAgUQGxQJCAIEDgUJBQ2KFwMBBAeTF6ANi1gBAQEBAQEBAQEBAQEBA?=
+ =?us-ascii?q?QEBAQEBAQEOD4I0doUzK4J9hDpSCh0JgnyCMQWRJ4cNiECGWgGBAI9jkASMVTS?=
+ =?us-ascii?q?HdQIDCwIZgTk2fDIyIYEUAYI8gkkcGYFOdosUAQEB?=
+X-IronPort-AV: E=Sophos;i="5.41,480,1498510800"; 
+   d="png'150?scan'150,208,150";a="27652775"
+Received: from mail-out.vy-verkko.fi (HELO emaila1.vy-verkko.fi) ([185.74.174.132])
+  by mta1.datacenter.fi with ESMTP/TLS/DHE-RSA-AES256-SHA256; 05 Sep 2017 15:36:34 +0300
+Received: from helx066.thl.fi ([10.111.252.2])
+	by emaila1.vy-verkko.fi  with ESMTP id v85CaXel018520-v85CaXen018520
+	(version=TLSv1.0 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 5 Sep 2017 15:36:33 +0300
+Received: from mail-hub.thl.fi (mail-hub.thl.fi [172.24.32.92])
+	by helx066.thl.fi (8.14.4/8.14.4) with ESMTP id v85CaX9s006057;
+	Tue, 5 Sep 2017 15:36:33 +0300
+Received: from HELW023.stakes.fi (excas2.thl.fi [172.24.32.143])
+	by mail-hub.thl.fi (8.13.8/8.13.8) with ESMTP id v85CaXNk009546;
+	Tue, 5 Sep 2017 15:36:33 +0300
+Received: from HELW040.stakes.fi ([fe80::1081:8771:8cef:496e]) by
+ HELW023.stakes.fi ([fe80::3c94:8cd:dc0:711f%12]) with mapi id 14.03.0319.002;
+ Tue, 5 Sep 2017 15:36:33 +0300
+From: Tuomi-Nikula Antti <antti.tuomi-nikula@thl.fi>
+To: =?Windows-1252?Q?=C4ij=E4l=E4_Tero?= <Tero.aijala@cinia.fi>
+CC: Koodistopalvelu <Koodistopalvelu@thl.fi>, Viiri Sampo
+	<sampo.viiri@thl.fi>, Korhonen Jaakko <jaakko.korhonen@espoo.fi>
+Subject: =?Windows-1252?Q?Re:_Lupakysely_(oli_Re:_SOTE-organisaatiorekisterin_nimi?=
+ =?Windows-1252?Q?-_ja_osoitetietojen_hy=F6dynt=E4minen_OpenStreeMap:ssa)?=
+Thread-Topic: =?Windows-1252?Q?Lupakysely_(oli_Re:_SOTE-organisaatiorekisterin_nimi-_ja?=
+ =?Windows-1252?Q?_osoitetietojen_hy=F6dynt=E4minen_OpenStreeMap:ssa)?=
+Thread-Index: AQHTFMXSOA35WDewHUCuaV/8zm/2cKKDdfhAgCLkPwCAAANykA==
+Date: Tue, 5 Sep 2017 12:36:32 +0000
+Message-ID: <DA077BBC-C86D-4A1F-8F62-C7266E918FC8@thl.fi>
+References: <E2A064D7-D9BD-42B9-B93D-DB9D35792F3C@cinia.fi>
+ <78C85A3B3B5FF94E968A6A4B0602AB7466401371@HELW040.stakes.fi>,<28E80CBA-BBD2-4272-8A46-8BEBD3F0ED2C@cinia.fi>
+In-Reply-To: <28E80CBA-BBD2-4272-8A46-8BEBD3F0ED2C@cinia.fi>
+Accept-Language: fi-FI, en-US
+Content-Language: fi-FI
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+	boundary="_003_DA077BBCC86D4A1F8F62C7266E918FC8thlfi_"; type="text/plain"
+MIME-Version: 1.0
+Return-Path: antti.tuomi-nikula@thl.fi
+X-MS-Exchange-Organization-Network-Message-Id: 11c582c6-4138-47ca-a6e0-08d4f45abee5
+X-MS-Exchange-Organization-AVStamp-Enterprise: 1.0
+X-MS-Exchange-Organization-AuthSource: S13EXCH2.Corenet.local
+X-MS-Exchange-Organization-AuthAs: Anonymous
+Content-type: multipart/mixed;
+	boundary="B_3587558058_1361119529"
+
+> This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+--B_3587558058_1361119529
+Content-type: text/plain;
+	charset="UTF-8"
+Content-transfer-encoding: quoted-printable
+
+Moi,
+
+Se k=C3=A4y kyll=C3=A4. Kunhan l=C3=A4hde vain mainitaan, on p=C3=A4=C3=A4asia.
+
+Yt. Antti
+
+L=C3=A4hetetty iPhonesta
+
+=C3=84ij=C3=A4l=C3=A4 Tero <Tero.aijala@cinia.fi<mailto:Tero.aijala@cinia.fi>> kirjoitt=
+i 5.9.2017 kello 15.24:
+
+Hei,
+
+Onko datan k=C3=A4ytt=C3=A4minen OK my=C3=B6s siten, ett=C3=A4 THL mainitaan l=C3=A4hteen=C3=A4 tuo=
+lla: http://wiki.openstreetmap.org/wiki/Contributors. Ei siis copyright -siv=
+ulla, kuten aiemmin kysyin?
+
+T: Tero
+
+L=C3=A4hett=C3=A4j=C3=A4: Tuomi-Nikula Antti <antti.tuomi-nikula@thl.fi<mailto:antti.tu=
+omi-nikula@thl.fi>>
+P=C3=A4iv=C3=A4m=C3=A4=C3=A4r=C3=A4: maanantai 14. elokuuta 2017 klo 10.37
+Vastaanottaja: =C3=84ij=C3=A4l=C3=A4 Tero <Tero.aijala@cinia.fi<mailto:Tero.aijala@cini=
+a.fi>>, Koodistopalvelu <Koodistopalvelu@thl.fi<mailto:Koodistopalvelu@thl.f=
+i>>, Viiri Sampo <sampo.viiri@thl.fi<mailto:sampo.viiri@thl.fi>>
+Kopio: Korhonen Jaakko <jaakko.korhonen@espoo.fi<mailto:jaakko.korhonen@esp=
+oo.fi>>
+Aihe: VS: Lupakysely (oli Re: SOTE-organisaatiorekisterin nimi- ja osoiteti=
+etojen hy=C3=B6dynt=C3=A4minen OpenStreeMap:ssa)
+
+Moi,
+
+t=C3=A4m=C3=A4 on selv=C3=A4 homma. Mit=C3=A4=C3=A4n esteit=C3=A4 k=C3=A4yt=C3=B6lle ei ole. L=C3=A4hdemerkint=C3=
+=A4 copyright-sivulla OK.
+
+Kun tiedot on lis=C3=A4tty, ilmoitatteko siit=C3=A4 viel=C3=A4 erikseen? Ker=C3=A4=C3=A4mme esi=
+merkkej=C3=A4 THL:n avointen tietovarantojen k=C3=A4yt=C3=B6st=C3=A4.
+
+Yt. Antti
+
+
+
+
+L=C3=A4hett=C3=A4j=C3=A4: =C3=84ij=C3=A4l=C3=A4 Tero [mailto:Tero.aijala@cinia.fi]
+L=C3=A4hetetty: 14. elokuuta 2017 9:23
+Vastaanottaja: Koodistopalvelu; Tuomi-Nikula Antti; Viiri Sampo
+Kopio: Korhonen Jaakko
+Aihe: Lupakysely (oli Re: SOTE-organisaatiorekisterin nimi- ja osoitetietoj=
+en hy=C3=B6dynt=C3=A4minen OpenStreeMap:ssa)
+
+Hei,
+
+THL:n SOTE-organisaatiorekisteri on alla kerrotun mukaisesti avointa dataa =
+CC BY 4.0 =E2=80=93lisenssill=C3=A4.
+Tarkoituksenamme olisi k=C3=A4ytt=C3=A4=C3=A4 rekisterin toimipaikka- ja osoitetietoja =
+siten, ett=C3=A4 toimipaikoista muodostettaisiin kohteita (POI) OpenStreetMapiin=
+.
+
+OpenStreetMap:n politiikka on, ett=C3=A4 jos l=C3=A4hdedata on CC BY 4.0 =E2=80=93lisenso=
+itua, sen k=C3=A4ytt=C3=A4minen vaatii viel=C3=A4 erikseen luvan datan omistajalta, eli =
+t=C3=A4ss=C3=A4 tapauksessa THL:lt=C3=A4.
+
+Esimerkkej=C3=A4 vastaavasta l=C3=B6ytyy,  tarvittaessa OSM voi mainita datan l=C3=A4ht=
+een copyright =E2=80=93sivuillaan: http://www.openstreetmap.org/copyright. Suomest=
+a siell=C3=A4 mainitaan Maanmittauslaitoksen data heid=C3=A4n NLSFI =E2=80=93lisenssill=C3=A4=C3=
+=A4n, ja CC BY 4.0:sta on esimerkkin=C3=A4 Wienin data.
+
+Onko siis mahdollista k=C3=A4ytt=C3=A4=C3=A4 THL:n SOTE-organisaatiorekisteri=C3=A4 OpenStr=
+eeMap:ssa?
+
+Vastaan mielell=C3=A4ni mahdollisiin lis=C3=A4kysymyksiin aiheesta.
+
+T: Tero
+
+--
+Tero =C3=84ij=C3=A4l=C3=A4
+Lead Engineer
++358-50-5733247
+tero.aijala@cinia.fi<mailto:tero.aijala@cinia.fi>
+
+Cinia Solutions Oy
+Naulakatu 3
+33100 Tampere
+www.cinia.fi<http://www.cinia.fi>
+
+<image001.png>
+
+
+L=C3=A4hett=C3=A4j=C3=A4: =C3=84ij=C3=A4l=C3=A4 Tero <Tero.aijala@cinia.fi<mailto:Tero.aijala@cinia=
+.fi>>
+P=C3=A4iv=C3=A4m=C3=A4=C3=A4r=C3=A4: perjantai 11. elokuuta 2017 klo 14.10
+Vastaanottaja: Koodistopalvelu <Koodistopalvelu@thl.fi<mailto:Koodistopalve=
+lu@thl.fi>>, Tuomi-Nikula Antti <antti.tuomi-nikula@thl.fi<mailto:antti.tuom=
+i-nikula@thl.fi>>, Viiri Sampo <sampo.viiri@thl.fi<mailto:sampo.viiri@thl.fi=
+>>
+Aihe: Re: SOTE-organisaatiorekisterin nimi- ja osoitetietojen hy=C3=B6dynt=C3=A4min=
+en OpenStreeMap:ssa
+
+Kiitoksia,
+
+Alkuper=C3=A4iseen kysymykseen menn=C3=A4kseni tuon wikisivun mukaan CC BY 4 ei ole=
+ yhteensopiva ODbL:n kanssa juuri tuon nime=C3=A4misehdon takia: http://wiki.ope=
+nstreetmap.org/wiki/Import/ODbL_Compatibility
+
+Pit=C3=A4=C3=A4p=C3=A4 keskustella ODA-porukan kanssa, miten eteenp=C3=A4in.
+
+T: Tero
+L=C3=A4hett=C3=A4j=C3=A4: Koodistopalvelu <Koodistopalvelu@thl.fi<mailto:Koodistopalvel=
+u@thl.fi>>
+P=C3=A4iv=C3=A4m=C3=A4=C3=A4r=C3=A4: perjantai 11. elokuuta 2017 klo 12.57
+Vastaanottaja: Tuomi-Nikula Antti <antti.tuomi-nikula@thl.fi<mailto:antti.t=
+uomi-nikula@thl.fi>>, =C3=84ij=C3=A4l=C3=A4 Tero <Tero.aijala@cinia.fi<mailto:Tero.aijal=
+a@cinia.fi>>, Viiri Sampo <sampo.viiri@thl.fi<mailto:sampo.viiri@thl.fi>>
+Aihe: VS: SOTE-organisaatiorekisterin nimi- ja osoitetietojen hy=C3=B6dynt=C3=A4min=
+en OpenStreeMap:ssa
+
+Kiitos ja kuittaus. T=C3=A4m=C3=A4 tuli nyt selv=C3=A4ksi ja min=C3=A4kin tied=C3=A4n jatkossa =
+vastata asiaa koskeviin tiedusteluihin.
+
+Yt.vp
+
+L=C3=A4hett=C3=A4j=C3=A4: Tuomi-Nikula Antti
+L=C3=A4hetetty: 11. elokuuta 2017 12:43
+Vastaanottaja: Koodistopalvelu; =C3=84ij=C3=A4l=C3=A4 Tero; Viiri Sampo
+Aihe: VS: SOTE-organisaatiorekisterin nimi- ja osoitetietojen hy=C3=B6dynt=C3=A4min=
+en OpenStreeMap:ssa
+
+Moi,
+
+lainaan t=C3=A4h=C3=A4n p=C3=A4=C3=A4johtajan p=C3=A4=C3=A4t=C3=B6st=C3=A4 avointen tietoaineistojen lisens=
+sist=C3=A4 THL:ss=C3=A4:
+
+
+=E2=80=9D THL on ottanut k=C3=A4ytt=C3=B6=C3=B6n uudet k=C3=A4ytt=C3=B6ehdot avoimille tietoaineistoi=
+lle (P=C3=A4=C3=A4johtajan p=C3=A4=C3=A4t=C3=B6s 105/2014).
+
+K=C3=A4ytt=C3=B6ehdoissa m=C3=A4=C3=A4ritell=C3=A4=C3=A4n, kuinka THL:n tuottamaa avointa dataa saa=
+ k=C3=A4ytt=C3=A4=C3=A4. Uusina k=C3=A4ytt=C3=B6ehtoina ovat JHS-189 suosituksen mukaisesti Crea=
+tive Commons 4.0 nime=C3=A4 (CC BY 4.0).
+
+THL:n strategisena vaikuttamistavoitteena on, ett=C3=A4 tuottamamme ja kokoamam=
+me tieto on avoimessa, vapaassa ja tehokkaassa k=C3=A4yt=C3=B6ss=C3=A4. K=C3=A4ytt=C3=B6ehtojen =
+mukaan avoimia tietoaineistoja voi k=C3=A4ytt=C3=A4=C3=A4 vapaasti ja my=C3=B6s kaupallisiin=
+ tarkoituksiin, korvauksetta ja maailmanlaajuisesti.
+
+Edellytyksen=C3=A4 tietoaineiston k=C3=A4yt=C3=B6lle on, ett=C3=A4 THL mainitaan l=C3=A4hteen=C3=A4=
+. K=C3=A4ytt=C3=B6lupa ei koske aineistoja, joihin liittyy kolmansien osapuolien tek=
+ij=C3=A4noikeuksia, henkil=C3=B6tietoja tai muita lain mukaan salassa pidett=C3=A4vi=C3=A4 t=
+ietoja. =E2=80=9D
+
+Eli mihin tahansa saa k=C3=A4ytt=C3=A4=C3=A4, my=C3=B6s bisnekseen, kunhan THL mainitaan l=C3=
+=A4hteen=C3=A4. Sin=C3=A4ns=C3=A4 t=C3=A4m=C3=A4 on minusta selke=C3=A4 homma, koska SOTE-rekisteri on=
+ avoin tietoaineisto. Kolmansien osapuolien tekij=C3=A4noikeuksia tms. ei minust=
+a tietoihin liity (Nimi, sijainti, toimipisteen tyyppi: Sosiaalipalvelu tai =
+Terveydenhoitopalvelu).
+
+Yt. Antti
+
+
+
+Antti Tuomi-Nikula
+
+Kehitt=C3=A4misp=C3=A4=C3=A4llikk=C3=B6,  YTM
+
+THL - Terveyden ja hyvinvoinnin laitos
+
+Tietopalvelut-osasto, Tietovarantopalvelut-yksikk=C3=B6
+Mannerheimintie 166, PL 30, 00271 Helsinki
+
+029 524 8645
+
+antti.tuomi-nikula@thl.fi<mailto:antti.tuomi-nikula@thl.fi>
+
+www.thl.fi/avoindata<http://www.thl.fi/avoindata>
+
+
+
+
+L=C3=A4hett=C3=A4j=C3=A4: Koodistopalvelu
+L=C3=A4hetetty: 11. elokuuta 2017 11:45
+Vastaanottaja: =C3=84ij=C3=A4l=C3=A4 Tero; Viiri Sampo
+Kopio: Tuomi-Nikula Antti
+Aihe: VS: SOTE-organisaatiorekisterin nimi- ja osoitetietojen hy=C3=B6dynt=C3=A4min=
+en OpenStreeMap:ssa
+
+Tuo rajoitus, johon viittasin, tarkoittaa k=C3=A4sitt=C3=A4=C3=A4kseni enemm=C3=A4nkin sit=C3=
+=A4, ett=C3=A4 ei olla perustamassa kilpailevaa SOTE-rekisteri=C3=A4. Sit=C3=A4h=C3=A4n t=C3=A4ss=C3=
+=A4 ei olla tekem=C3=A4ss=C3=A4. Mutta jottemme olisi pelk=C3=A4n mutu-tiedon varassa, kuu=
+lisin mielell=C3=A4=C3=A4n Antilta kannanoton asiaan.
+t.vp
+
+L=C3=A4hett=C3=A4j=C3=A4: =C3=84ij=C3=A4l=C3=A4 Tero [mailto:Tero.aijala@cinia.fi]
+L=C3=A4hetetty: 11. elokuuta 2017 11:28
+Vastaanottaja: Koodistopalvelu; Viiri Sampo
+Kopio: Tuomi-Nikula Antti
+Aihe: Re: SOTE-organisaatiorekisterin nimi- ja osoitetietojen hy=C3=B6dynt=C3=A4min=
+en OpenStreeMap:ssa
+
+OpenStreetMap =E2=80=93import vaatii muutamaa asiaa, l=C3=A4hinn=C3=A4 ett=C3=A4 data on yhte=
+ensopivaa heid=C3=A4n lisenssins=C3=A4 kanssa:
+http://www.openstreetmap.org/copyright
+http://wiki.openstreetmap.org/wiki/Import/Guidelines#Step_3_-_License_appro=
+val
+https://opendatacommons.org/licenses/odbl/summary/
+
+Tuolla sanotaan esimerkiksi, ett=C3=A4 =E2=80=9D Others have data policies that are a=
+lmost open, but have conflicts with issues like prohibitions on commercial u=
+se or requirements for attribution
+=E2=80=9D
+
+Tulkitsen tuota niin, ett=C3=A4 jos datan lisenssi kielt=C3=A4=C3=A4 kaupallisen k=C3=A4yt=C3=
+=B6n, se ei ole yhteensopiva ODbL kanssa eik=C3=A4 tietoa saisi ladata tuonne siin=
+=C3=A4 tapauksessa.
+
+Suomesta on sy=C3=B6tetty tuonne t=C3=A4h=C3=A4n menness=C3=A4 dataa:
+
+  *   Finland: Contains data from the National Land Survey of Finland's Top=
+ographic Database and other datasets, under the NLSFI Licence<http://www.maa=
+nmittauslaitos.fi/en/NLS_open_data_licence_version1_20120501>.
+
+Kun data on laitettu OpenStreetMapiin heid=C3=A4n lisenssill=C3=A4=C3=A4n, se on k=C3=A4yte=
+tt=C3=A4viss=C3=A4 sill=C3=A4 lisenssill=C3=A4 kaikille halukkaille.
+
+T: Tero
+
+
+L=C3=A4hett=C3=A4j=C3=A4: Koodistopalvelu <Koodistopalvelu@thl.fi<mailto:Koodistopalvel=
+u@thl.fi>>
+P=C3=A4iv=C3=A4m=C3=A4=C3=A4r=C3=A4: perjantai 11. elokuuta 2017 klo 11.18
+Vastaanottaja: Viiri Sampo <sampo.viiri@thl.fi<mailto:sampo.viiri@thl.fi>>,=
+ =C3=84ij=C3=A4l=C3=A4 Tero <Tero.aijala@cinia.fi<mailto:Tero.aijala@cinia.fi>>
+Kopio: Tuomi-Nikula Antti <antti.tuomi-nikula@thl.fi<mailto:antti.tuomi-nik=
+ula@thl.fi>>
+Aihe: VS: SOTE-organisaatiorekisterin nimi- ja osoitetietojen hy=C3=B6dynt=C3=A4min=
+en OpenStreeMap:ssa
+
+Hei,
+kyll=C3=A4, kaikki koodistopalvelimella olevat aineistot, mukaan lukien SOTE-or=
+ganisaatiorekisteri, ovat julkisia ja data vapaasti ladattavissa omiin tieto=
+j=C3=A4rjestelmiin a) ohjelmointirajapinnan kautta ja/tai b) hy=C3=B6dynt=C3=A4=C3=A4 koodis=
+topalvelimen ns. virallisia julkaisuja, jollaiset l=C3=B6ytyv=C3=A4t kunkin aineisto=
+n Julkaisut-v=C3=A4lilehdelt=C3=A4 formaateissa xml, excel, csv).
+
+Huomioitavaa kuitenkin on, ett=C3=A4 SOTE-rekisterin tiedoilla =E2=80=9Dansaitseminen=
+=E2=80=9D eli k=C3=A4ytt=C3=B6 omissa bisneksiss=C3=A4 ei ole luvallista. Mihin sitten raja ve=
+det=C3=A4=C3=A4n? Lis=C3=A4sin jakeluun Antti Tuomi-Nikulan, joka tuntee aihealuetta syv=
+emm=C3=A4lt=C3=A4, mik=C3=A4li Tero haluat viel=C3=A4 varmistaa asian OpenSrtreetMap:n kanna=
+lta.
+
+Yt.
+Veli-Pekka Peltonen
+THL/Koodistopalvelu
+
+L=C3=A4hett=C3=A4j=C3=A4: Viiri Sampo
+L=C3=A4hetetty: 11. elokuuta 2017 10:48
+Vastaanottaja: =C3=84ij=C3=A4l=C3=A4 Tero; Koodistopalvelu
+Aihe: RE: SOTE-organisaatiorekisterin nimi- ja osoitetietojen hy=C3=B6dynt=C3=A4min=
+en OpenStreeMap:ssa
+
+Hei Tero!
+
+V=C3=A4lit=C3=A4n viestisi THL:n koodistopalvelun s=C3=A4hk=C3=B6postiosoitteeseen. THL:n k=
+oodistopalvelu vastaa SOTE-organisaatiorekisterist=C3=A4.
+
+K=C3=A4sitt=C3=A4=C3=A4kseni rekisterin tiedot ovat sin=C3=A4ns=C3=A4 t=C3=A4ysin julkisia eik=C3=A4 ni=
+ihin tarvita mit=C3=A4=C3=A4n erityisi=C3=A4 lupia. Mutta tuohon en osaa heti sanoa, ett=
+=C3=A4 kenen nimiss=C3=A4 tiedot tulisi ladata. THL kun vastaa rekisterin yll=C3=A4pidos=
+ta mutta ei tietosis=C3=A4ll=C3=B6ist=C3=A4 tai niiden paikkansapit=C3=A4vyydest=C3=A4?
+
+terveisin
+
+Sampo Viiri
+Erikoissuunnittelija
+Tietovarantopalvelut
+Terveyden ja hyvinvoinnin laitos (THL)
+Puhelin: 029 524 7936
+Postiosoite: PL 30, 00271 Helsinki
+
+
+
+
+From: =C3=84ij=C3=A4l=C3=A4 Tero [mailto:Tero.aijala@cinia.fi]
+Sent: 11. elokuuta 2017 9:14
+To: Viiri Sampo
+Subject: SOTE-organisaatiorekisterin nimi- ja osoitetietojen hy=C3=B6dynt=C3=A4mine=
+n OpenStreeMap:ssa
+
+Hei,
+
+Osana ODA-hanketta saimme toimeksiannon Espoon kaupungilta (Jaakko Korhonen=
+ at espoo.fi<http://espoo.fi>) / ODA-hankkeelta ladata SOTE-organisaatioreki=
+steri THL:n sivuilta, muuntaa osoitetiedot karttakoordinaateiksi, sek=C3=A4 sy=C3=B6=
+tt=C3=A4=C3=A4 kyseiset tiedot (Nimi, sijainti, toimipisteen tyyppi: Sosiaalipalvelu=
+ tai Terveydenhoitopalvelu) OpenStreeMap:iin Point of Interestein=C3=A4.
+
+Yll=C3=A4mainittua tietoa k=C3=A4ytett=C3=A4isiin my=C3=B6hemmin ODA-sovelluksessa. Tietenk=
+in tieto olisi kenen tahansa muunkin k=C3=A4ytett=C3=A4viss=C3=A4 kartalla.
+
+Millaisella lisenssill=C3=A4 nuo tiedot ovat k=C3=A4ytett=C3=A4viss=C3=A4? Kuka voi my=C3=B6nt=C3=
+=A4=C3=A4 luvan ladata tiedot? Ent=C3=A4 kenen nimiss=C3=A4 tiedot saa ladata? Olisi parem=
+pi, jos lataaja on ns virallinen taho, jotta ihmiset pystyisiv=C3=A4t paremmin t=
+iet=C3=A4m=C3=A4=C3=A4n, mik=C3=A4 tieto pit=C3=A4=C3=A4 paikkansa. Eli jos lataajaksi laitetaan THL=
+ tai vaikka ODA, niin se olisi parempi kuin esimerkiksi meid=C3=A4n yrityksemme.
+
+T: Tero =C3=84ij=C3=A4l=C3=A4
+
+--
+Tero =C3=84ij=C3=A4l=C3=A4
+Lead Engineer
++358-50-5733247
+tero.aijala@cinia.fi<mailto:tero.aijala@cinia.fi>
+
+Cinia Solutions Oy
+Naulakatu 3
+33100 Tampere
+www.cinia.fi<http://www.cinia.fi>
+
+<image002.png>
+
+
+
+
+
+--B_3587558058_1361119529
+Content-type: image/png; name="image001.png";
+ x-mac-type="504E4766"
+Content-ID: <image001.png@01D3265B.06CF1370>
+Content-disposition: attachment;
+	filename="image001.png"
+Content-transfer-encoding: base64
+
+
+iVBORw0KGgoAAAANSUhEUgAAAFcAAAAtCAYAAADbcffLAAAEDWlDQ1BJQ0MgUHJvZmlsZQAA
+OI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9
+oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvu
+uWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd
+/p+tt0YdFSBxH2Kz5qgLiI8B8KdVy3YBevqRHz/qWh72Yui3MUDEL3q44WPXw3M+fo1pZuQs
+4tOIBVVTaoiXEI/MxfhGDPsxsNZfoE1q66ro5aJim3XdoLFw72H+n23BaIXzbcOnz5mfPoTv
+YVz7KzUl5+FRxEuqkp9G/Ajia219thzg25abkRE/BpDc3pqvphHvRFys2weqvp+krbWKIX7n
+hDbzLOItiM8358pTwdirqpPFnMF2xLc1WvLyOwTAibpbmvHHcvttU57y5+XqNZrLe3lE/Pq8
+eUj2fXKfOe3pfOjzhJYtB/yll5SDFcSDiH+hRkH25+L+sdxKEAMZahrlSX8ukqMOWy/jXW2m
+6M9LDBc31B9LFuv6gVKg/0Szi3KAr1kGq1GMjU/aLbnq6/lRxc4XfJ98hTargX++DbMJBSiY
+MIe9Ck1YAxFkKEAG3xbYaKmDDgYyFK0UGYpfoWYXG+fAPPI6tJnNwb7ClP7IyF+D+bjOtCpk
+hz6CFrIa/I6sFtNl8auFXGMTP34sNwI/JhkgEtmDz14ySfaRcTIBInmKPE32kxyyE2Tv+thK
+bEVePDfW/byMM1Kmm0XdObS7oGD/MypMXFPXrCwOtoYjyyn7BV29/MZfsVzpLDdRtuIZnbpX
+zvlf+ev8MvYr/Gqk4H/kV/G3csdazLuyTMPsbFhzd1UabQbjFvDRmcWJxR3zcfHkVw9GfpbJ
+meev9F08WW8uDkaslwX6avlWGU6NRKz0g/SHtCy9J30o/ca9zX3Kfc19zn3BXQKRO8ud477h
+LnAfc1/G9mrzGlrfexZ5GLdn6ZZrrEohI2wVHhZywjbhUWEy8icMCGNCUdiBlq3r+xafL549
+HQ5jH+an+1y+LlYBifuxAvRN/lVVVOlwlCkdVm9NOL5BE4wkQ2SMlDZU97hX86EilU/lUmkQ
+UztTE6mx1EEPh7OmdqBtAvv8HdWpbrJS6tJj3n0CWdM6busNzRV3S9KTYhqvNiqWmuroiKgY
+hshMjmhTh9ptWhsF7970j/SbMrsPE1suR5z7DMC+P/Hs+y7ijrQAlhyAgccjbhjPygfeBTjz
+hNqy28EdkUh8C+DU9+z2v/oyeH791OncxHOs5y2AtTc7nb/f73TWPkD/qwBnjX8BoJ98VVBg
+/m8AABDASURBVGgF7VsJdJXltd3fTZjHMEMYEqYCIiAyRQEhKpSyABkEC1KkUClPV6lQ12qL
+lSctgnYh8uCJiuU9l7RgaR+FlqlMgkFKBXmIECYhkYQQIcyEKfc/b+/vegO0CATFtbh9Z62b
++9/7D/n//Z1vn33Od64zGm7FggC4cA44cRR28ACQ9zk/XwCCMGAFfOdlneOLF3fxQFwIKFEK
+qFYDLrE+UKkKUKzErfznO+YcV2RwwwTvWC6QsRd2+CBQqjQBqw1XrRZQumwEXB0THTMBHBfn
+gbazZ4DDWcCRQ0DtJLi72twxQN3KjRYNXAGTSVAFTvkEuOZtgUsXgXyCdvIE7MxJoIBeK2+l
+o0Jzws8L/ilWHK58RaBMBaBsOZ5fiZ78/54LE3ib1xPAYxFvq54I258OfLoLriJBqpVE0Oi1
+8txwAezCeb5fIrBEuVgxOA8it8+d9QNhn30KVCE9tEoh+rFrN/bck8dh6/4MV5XTvllrWA6p
+YO92oHJ1uLoNPaD2eTbwOb1ZPEwwPbfGkWdlBQT5IsG+SA+PLw7USCSFJEZoQwMTw3Z9cAmY
+vfcXuJYdgHoNub2EoARw7VM9JLZjC5BLqkhqDEcO9Z56ioNxjMHt7GnSA7mBHu0qVgYqVvHg
+G2kFhzKAu9vCNW4Rw9Dy8b80oB3KhG1cBdzbKQLA5ve957qadbznGoF3De+CxdNTt/4NlrYC
+lrmfHkpPjdKACFeB7dIluJLk12QOQudvw93NQFYhgYqh2r8guMcpr1YtBNp1pfM52N/XEZQe
+XgnY5jRSQjUI5OBP78CW/xGuNANUYl2gDhVA9VqwMuUJqnDzf+DOnYFlZQCfHQBy6OlBAdyo
+n8L1fOxfDNzTJwnsnzht7/Wg2cbVcA/2ofz6HLb7Y3prc9inOxH813Q48qrr0NlPeTt2lODt
+gzxaPKt98lpjgHPy7sRkoG59KobylHDk6Ko1ERo+NqbBJQJXGPWpvb+MADYDyiVEtlP7wPbt
+hDtOHm3SEsGbvwb+9h7cd59kMCvDYLeC3pgJtGhH2rgHrgW5lJ5pSiaoyUIhatxQfERB7NmO
+IH0bXL3GQMeHr/jHsbl5FefaljS4M6eAlFTY0nfh2nWJRPv9u2CNmiOY+CM/reOemYjgw/U8
+5g8Ide8H3NMOtm0TbCdVBPUuzlNyyai+vOAtURKuSlVybWug0d1A2l9h1Lyhn07VATFrl8E9
+zSi/lpKrHYHN3EPZxClftxFs01omC/cieOUXsNxsxI3+GYL5b8HyjiA07GnqXQK/gjQiPds6
+Be7e++EaNKVKEO+Sc08zuRBdrF8O277Vp8GhHv3gUnsDjQl0DFsEXIGwiw8epk6tUh32wSq4
+7gMYyDj9yZPBb2dRDaxG3PipCOa8AitVBqFBI2HkXfGnGzIKoUe+RwVQ6bpQ2dHDsN9zYBbP
+g3u4N0LjJl/3+Dt9Z4RzmYF5kKhnjZmYa9me05/JggLSGe5b/1e4MRMQ/GU+Iz0nuoCd9xa9
+MB6h6b+Da3rPTeHglJX923OwVry+1EOMWwRcTndcvACT8GcNAJRZtoYUQaEffn40vXII7MBu
+QIFNfDttgpdcoZkLOP0pw4po7r7bG8xOnTqFxYsXo2bNmnjggQfIcFfH7aLc7ubNm6FXamoq
+GjdmIC6CxUs22WfMmpRhMed3tetTTuVE6GH/Xjjp0qqkiv+eidDQp2DLFnhpFZow45aALcK9
+XXVowNR63bp1SE9Px+nTp1Gekq558+Zo06YNSpViKfMLy8/Px+TJk/Hmm2+iTJkyePnllzFw
+4ECqFlWSimZ79uzB6NGjsWvXLjRr1gwLFixA3bp1b/4iLMpYsPRds5N5Fiyea5aTZcGaxWbZ
+GRZ+5jELj33cwr/4oYWHdLVgwWwreLiJBeuXK7H7RqygoMCWL19uXbt2tcqVK1vp0qWtRIkS
+/r1KlSqWkpJiK1eutHA47O8nNzfXmjRpouzFv5544gk7e/bsLd3r0qVLC6+j6y1cuLBI1wkh
+n1SggooK3ZWrAiVLRuoC+WcprahJ72rJdHcH8J1HmY39D1yzFnAdu9386H2FIy+y2DNx4kT0
+7dsXa9euRV5eHuSZF3ivej969Cg2btyIXr16Yfz48SCI3qP79euHqlWrIjExET179rzKs4ty
+O40aNUL79u1RqVIlcBDRtm3bopyOeBxh4ZtTDCwTOmZNiugoVwGW/r+c9hX44j6lq6zBBjnZ
+CP1kEvWrF7BF+ke3crCmtqb4JdYmZPRcNGzYEAkJCR7c/fv3IysrC+fPn8c777yDESNG+P1j
+xoxBgwYNULt2bXTu3Jm361iwC3DixAl/XhyL9+JjzgpkZmb6wdJg6HWl1a9fH1OnTvWc2717
+d9SqxcrgP5gG+Pjx4/4ei1GO6hjRkSzeTuRFiigqDcqDjxyGq5MM+8McD6ix5Ii6JPKsAyzI
+UMu27fwPl789H7ds2YKXXnqpENjk5GRMmjQJ3bp18yCfO3cOaWlpeO211/y79iUlJXmgxI3a
+J/BIIT6oKci9+OKL+OSTT1C8eHGMGjXKg7Zs2TKcPHnS8/eQIUPQp08fPxh6qoMHD2Lu3LnQ
+udu2bcOrr77qZwa5ATt27MCaNWuwYcMG7Nu3z8+asmXLokOHDhgwYAC6dOlCp1y9yJg0mKVv
+NRaxLUhbYZabZeGn+lr4x+TcKc9aeNrz5N7BFv7RALOCS0XinVs9mIHE6HGe8zi9bdOmTde8
+FB/cOBBG7/b7Gexs8ODBhVw5Z84c//3hw4etVatWhd9XrFixcJs4+m0GRps+fbqJ52Vbt241
+UoLfR+DsyJEj/vuPP/74Kl6Pnh9958yy+fPnWySEqqoVLXRrfSauGBcej9FT6cmnmM7GkQZy
+SRcJnDbfACWIa3fv3k2ZrediNk6+a9eOtYtrWLly5dC6detCuSUKkLdGLSrD9P2VqkIUMXTo
+UK8qevdmtkjTbJgyZYrndn0WfUTPYSAt9GjNEPG5rvnQQw9h2rRp4KCgY8eOOs3ThOgs3n77
+WmQNjBpWhRlsXAs7eRTu2/0pwWoQTIJNDoYK3iyY+8/+ErfvjwLTGSYvMj2gAsvXbWPHjsWE
+CROgwdHA0Us9DeTk5PgpX61atS/9lzqHM8LztyShBlNAi6NFF+JgUUW87aYSUILA1Vy/aMiC
+t2O9FlIEOknA0oGsJEeuIgvcvMjtNmlS3axM3itP/rpNCkPAyBT49BLH6v/Kq69nCo4a/Hnz
+5mH16tUgXfjzpGKiTkFpSLWg/oHz+ZG6gHoNNKW0TFOc1MCiOcoSXAU7LqGrWOOSvnXbvVfR
+lpzon08PIm/4uu3KpEKARgdT/+fK7Wv9XwVbyT0pletZyNVM9AoB1WsDkmHUdKpiOS3BaNWX
+2Y+x8UMyDQT3i8WF613zK+8TT0pfStrIFPlff/31a15X0XrWrFl+il7zgC/5Msrn2q3tKz9/
+ySk+yxMvS0FEge3Ro4f34EWLFmHGjBlgYlN4erzjulaQ/glcq/silbEGTVib3cIDOC19l0zp
+SFBT0buA05PL60i4fIHCK33NG8OGDfPpptJdTbXnnnsOx44d8x6jKSx9yowJb7/9NqgE/L5x
+48bd0Ou+ym3Ko5W8MAssvIxk12OPRZarmCkW0oIOiEeLDgxirIQZVyEOkXNSHoQRSN+XwBVb
+O05vVV7OuiySvwX78D24bgMKL367NhQcpF1HjhzpgVN29sILL3hdq8gtwPVdlI8pfTB8+HCf
+YNyue5J3i6d1b1FT7WLv3r1eKy9ZssQnNNF9IVW+1Kzhl8MdQRXvsp/LVi1iMsGLKNjVY9F8
++999Ucf3Hyih+AbskUcewRtvvOGzLXGkgMzOzvYPo6iuz1ITkkCzZ8/2WZc4WslD1PRZpvdo
+phf97Hfwj0CL7tN29BxtRwdPwUrfi6qUaEiKySQZJd9ETcrWdD8yHR+PKlzJrUcQM/bTM5mJ
+bd2I0IM9EfxuNingOA8zuITKMHXTHMrkSkNnLrmvZPbGSCt5dhtN01DTrkWLFp5zxa+K5Hpg
+ZVlKVzt16oRnn33W5/+6FQ1CMrM5nSNTyiwTKE2bNi0ES3IqatqnqpcA0flKr2XSuEw8PA3o
+OlHNrHgwc+ZMD2hGRoYfGIE9aNAgMNnx2ZyXZ1ydNfv9bNi7c4D+jwPzf4PQM79EePq/I9Sl
+B9zAkWyeOwjTkszKhXCdunv6AMuU7mGun3FV4psyca64VpSgVFP6V+9XmrxNA6CUVaYBEI3I
+66KFHw1ajRo1/ADpGJ0jOSU+FbjSuCVZwNIM0PfRwaxevbrfr3NkqmmoHKnzVOtVMJP36v40
+EJFlHnpkMGYQ0G84e8LeZ1XsFNe4eiGY+SJCU+jBF/LhaiVFCjpqFHmgJ1eD8yJU0fp+qOOm
+KGa7t5OKzjCIphTltDvuWEYqWo06cL242rCEa1v3deUCJTmVU8WlkAJm/xq+syZ9KzUwV3Hb
+sAOHC5nGZXUVceyjNLY5/ZmKQhRyA2MPr2822bk5wuc3OPxO33159TdrP4InewO9B1PfMsCl
+rULoqZ8jmPFLuIf6INR/WGR9rUOqb0+yTWtY62UwVMcjdTG4CuwTEDbsuUpVfdLhG6Dp9aZk
+RL28zFp8fxi7ctTLALWUxrBdBpcPGcyZyuWc/0Do+RkI5nJZR3w6YBj7FX6M0JDRcN8ZyH6F
+dQi1onyjTAs2cOFSHq4+Xa2lsVfXDn3GwMeXNLFMGR8TFFdHdQl+Vtfkzi2+buHadtERMWtX
+gWv5p2DjR7N2y/rCD38G+89J7KRpQ29jQ8isyXD9hyP06PdhOz7kigVpQavFSpU/TWdUYIcN
+AY94LQdF7Uwypc6Sesr+1DCitJotUa5W3cvHRI6Mub9XgeufjivB4fFPRvrAHh2O4K1X4Jre
+Tf5NRfDGS3AVKiP0g3Hk6dqRFWFNb3UvqmuRQQ7nz/kGaN/8rPKlVl6l/STlylZkfYLZTTY5
+nXRys0vydyrq/wyunoQ9tMHTXDNjKhzq+zhsOnlXPxQZNALB0j/6rsdQt77sF/sBPZG1B3q6
+/8EJA54PjgJazXfMR0xt/WrnP8hj9FsJljG914pv1bofw3ZtcPXAzMgC9iz4H5P0H4rg3bfg
+uBziyMHqFLclC2DnuO52f2qk57Z2coRnFQxVZRPnElz/ix2pjHJMOujlSqttNdUFeyNCo8fH
+MLQMMRTQguDaRi4Nq/mOvBk3fAyCjz5gVyODWP2GLKbTs+mNtn5FhEsV2OokAfWbcH8TUgBp
+IMxLUzP7H6ns2sZglxX5jk156jNz7KCMZbs+uHryvMMIfjUW+GgDlcMIuBpcIaZM88X1xndF
+2u/VIC2FkEPwtCx0gapBfbk6X9U0KYbKrKTVomrg7yEs/xzf+ZuKPt/TETFrNwaXj27sbbAF
+v4GxuxFcjXA9BrHrhoBuYbv+gT3cJoCJ9VjSr89yZCXKM669eWR5rgpBUgxaws/K4ABkenpA
+7+8i9PjTMQusHuymwI0iYKqGrVmMYNE8rwpcs5ZAUjK7xVnYCXiUlIBaoc4ygH3Ra4Di9Fpp
+YHKs6sCOBxozNVXaQv2eiF46Jt+LBG4hAtkZ7Ntdx+bneeRd0oGSDfaTiTLA7MyVoxKQWlBE
+U2Khrp7cHP7MKptLSJRrakAZSM38fUq6GLZbAzcKiH5umsufU21nV/nWDwBShOUx1dWP+S5R
+dokapHO5/uZqMC1WSfOe++DU4q9lI0m3GLb/A+y3Jvokx/b/AAAAAElFTkSuQmCCAA==
+--B_3587558058_1361119529
+Content-type: image/png; name="image002.png";
+ x-mac-type="504E4766"
+Content-ID: <image002.png@01D3265B.06CF1370>
+Content-disposition: attachment;
+	filename="image002.png"
+Content-transfer-encoding: base64
+
+
+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
+--B_3587558058_1361119529--
+

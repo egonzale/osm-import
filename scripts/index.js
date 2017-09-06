@@ -148,7 +148,7 @@ reader.on('record', function(record) {
 
         if (!checkIfCitySetAndMatch(jsItem.postOffice)) return;
 
-        let addressString = jsItem.streetAddress + "," + jsItem.postNumber + " " + jsItem.postOffice;
+        let addressString = jsItem.streetAddress + " " + jsItem.houseNumber + "," + jsItem.postNumber + " " + jsItem.postOffice;
         let encodedAddress = encodeURIComponent(addressString);
 
         let url = BuildUrl(queryUrl, {

@@ -72,7 +72,7 @@ This would be converted to something like this:
     <tag k='addr:street' v='Suvantokatu'/>
     <tag k='addr:housenumber' v='10'/>
     <tag k='addr:postcode' v='33100'/>
-    <tag k='sote_oid' v='1.1.111.1111.1111111.11.11'/>
+    <tag k='oid' v='1.1.111.1111.1111111.11.11'/>
     <tag k='addr:country' v='FI'/>
     <tag k='amenity' v='clinic'/>
     <tag k='phone' v='050123456'/>

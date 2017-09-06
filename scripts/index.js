@@ -211,7 +211,7 @@ reader.on('record', function(record) {
                                 { '@': { 'k': 'addr:street', 'v': jsItem.streetAddress } },
                                 { '@': { 'k': 'addr:housenumber', 'v': jsItem.houseNumber } },
                                 { '@': { 'k': 'addr:postcode', 'v': jsItem.postNumber } },
-                                { '@': { 'k': 'sote_oid', 'v': jsItem.oid } },
+                                { '@': { 'k': 'oid', 'v': jsItem.oid } },
                                 { '@': { 'k': 'addr:country', 'v': jsItem.country } }]
                             };
                             if (amenityString.length > 0) {

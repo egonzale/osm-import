@@ -66,16 +66,16 @@ ifiedby="Lehtonen, Jari">
 This would be converted to something like this:
 
 ```
-<?xml version='1.0' encoding='UTF-8'?>
-<osm version='0.6' generator='JOSM'>
-<node id='-5' lat='62.651583' lon='29.335118' timestamp='2015-06-16T11:21:47'>
-    <tag k='name' v='Jampan Terveyspalvelu Oy'/>
-    <tag k='addr:city' v='Jäppilä'/>
-    <tag k='addr:street' v='Jäppilän valtatie 12'/>
-    <tag k='addr:postcode' v='00100'/>
+<node id='-45' lat='61.495632' lon='23.770766' timestamp='2016-02-02T01:30:24'>
+    <tag k='name' v='Hammaslääkintäyritys Plakki Oy'/>
+    <tag k='addr:city' v='Tampere'/>
+    <tag k='addr:street' v='Suvantokatu'/>
+    <tag k='addr:housenumber' v='10'/>
+    <tag k='addr:postcode' v='33100'/>
+    <tag k='sote_oid' v='1.1.111.1111.1111111.11.11'/>
     <tag k='addr:country' v='FI'/>
     <tag k='amenity' v='clinic'/>
-    <tag k='phone' v='0501234567'/>
+    <tag k='phone' v='050123456'/>
 </node>
 ```
 

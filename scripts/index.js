@@ -39,8 +39,8 @@ nodeCleanup((exitCode, signal) => {
 
 let reader = BigXml.createReader('./input/sote.xml', 'termitementry', { gzip: false });
 
-const maxConcurrent = 20;
-const maxQueued = 100;
+const maxConcurrent = 10;
+const maxQueued = 50;
 
 let requestQueue = new PQueue({ concurrency: maxConcurrent });
 

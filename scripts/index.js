@@ -215,6 +215,7 @@ reader.on('record', function(record) {
                                 { '@': { 'k': 'addr:housenumber', 'v': jsItem.houseNumber } },
                                 { '@': { 'k': 'addr:postcode', 'v': jsItem.postNumber } },
                                 { '@': { 'k': 'oid', 'v': jsItem.oid } },
+                                { '@': { 'k': 'source', 'v': 'THL SOTE orgnisation registry' } },
                                 { '@': { 'k': 'addr:country', 'v': jsItem.country } }]
                             };
                             if (amenityString.length > 0) {

@@ -122,6 +122,9 @@ reader.on('record', function(record) {
                     jsItem.streetAddress = getStreetFromAddress(item.text);
                     jsItem.houseNumber = getNumberFromAddress(item.text);
                 }
+                if (attrs.type === "officepostaddress") {
+                    jsItem.address = item.text;
+                }
                 if (attrs.type === "officetelephone") {
                     jsItem.phone = item.text;
                 }

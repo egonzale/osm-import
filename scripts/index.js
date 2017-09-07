@@ -39,10 +39,11 @@ nodeCleanup((exitCode, signal) => {
 
 let reader = BigXml.createReader('./input/sote.xml', 'termitementry', { gzip: false });
 
-const maxConcurrent = 10;
-const maxQueued = 50;
+const MAX_CONCURRENT = 10;
+const MAX_QUEUED = 50;
+const CONFIDENCE_LIMIT = 0.6;
 
-let requestQueue = new PQueue({ concurrency: maxConcurrent });
+let requestQueue = new PQueue({ concurrency: MAX_CONCURRENT });
 
 let checkIfCitySetAndMatch = (city) => {
     let returnValue = true;
@@ -190,7 +191,7 @@ reader.on('record', function(record) {
             }
         });
 
-        if (requestQueue.size >= maxQueued) {
+        if (requestQueue.size >= MAX_QUEUED) {
             console.log("PAUSING READER at: " + requestQueue.size);
             reader.paused = true;
             requestQueue.onEmpty().then(() => {
@@ -206,7 +207,13 @@ reader.on('record', function(record) {
                 try {
                     let response = JSON.parse(result.body);
 
-                    if (response["features"][0].geometry.type === "Point") {
+                    if (response["features"][0].geometry.type === "Point" && response["features"][0].properties.accuracy === "point") {
+
+                        const confidence = parseFloat(response["features"][0].properties.confidence);
+
+                        if (confidence < CONFIDENCE_LIMIT) {
+                            throw "Not confident enough: " + confidence;
+                        }
 
                         jsItem.coordinates = response["features"][0].geometry.coordinates;
                         if (jsItem.coordinates && jsItem.coordinates.length === 2) {

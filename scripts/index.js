@@ -13,6 +13,10 @@ const optionDefinitions = [{ name: 'city', type: String, multiple: false, defaul
 const cmdOptions = commandLineArgs(optionDefinitions); 
 console.dir(cmdOptions);
 
+const MAX_CONCURRENT = 20;
+const MAX_QUEUED = 200;
+const CONFIDENCE_LIMIT = 0.6;
+
 let recordCount = 0;
 let geocodingResultCount = 0;
 let geocodingErrorCount = 0;
@@ -38,10 +42,6 @@ nodeCleanup((exitCode, signal) => {
 });
 
 let reader = BigXml.createReader('./input/sote.xml', 'termitementry', { gzip: false });
-
-const MAX_CONCURRENT = 10;
-const MAX_QUEUED = 50;
-const CONFIDENCE_LIMIT = 0.6;
 
 let requestQueue = new PQueue({ concurrency: MAX_CONCURRENT });
 

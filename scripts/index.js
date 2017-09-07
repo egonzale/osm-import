@@ -72,6 +72,30 @@ let getNumberFromAddress = (address) => {
     return returnString;
 }
 
+let logError = (error, item) => {
+    console.log("ERROR: " + error);
+    geocodingErrorCount++;
+    errorLog.write(prepend + JSON.stringify(item, null, 2));
+    if (!prepend) {
+        prepend = ",";
+    }
+}
+
+let validAddress = (addressString) => {
+    // Check if this is a post office box address
+    let returnValue = false;
+    if (addressString && addressString.length > 0) {
+        let testString = addressString.trim();
+        const index = testString.indexOf("PL");
+        if (index == -1 || (index > 0 && testString.charAt(index-1) !== ',')) {
+            returnValue = true;
+        }
+    } else {
+        console.dir(addressString);
+    }
+    return returnValue;
+}
+
 reader.on('record', function(record) {
     recordCount++;
 
@@ -150,6 +174,11 @@ reader.on('record', function(record) {
         }
 
         if (!checkIfCitySetAndMatch(jsItem.postOffice)) return;
+
+        if (!validAddress(jsItem.streetAddress)) {
+            logError("Invalid address: " + jsItem.streetAddress, jsItem);
+            return;
+        }
 
         let addressString = jsItem.streetAddress + " " + jsItem.houseNumber + "," + jsItem.postNumber + " " + jsItem.postOffice;
         let encodedAddress = encodeURIComponent(addressString);
@@ -231,11 +260,7 @@ reader.on('record', function(record) {
                     }
 
                 } catch (error) {
-                    errorLog.write(prepend + JSON.stringify(jsItem, null, 2));
-                    if (!prepend) {
-                        prepend = ",";
-                    }
-                    geocodingErrorCount++;
+                    logError(error, jsItem);
                 }
             }
         }).catch((error) => {

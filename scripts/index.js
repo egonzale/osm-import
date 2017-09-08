@@ -13,9 +13,9 @@ const optionDefinitions = [{ name: 'city', type: String, multiple: false, defaul
 const cmdOptions = commandLineArgs(optionDefinitions); 
 console.dir(cmdOptions);
 
-const MAX_CONCURRENT = 20;
-const MAX_QUEUED = 200;
-const CONFIDENCE_LIMIT = 0.6;
+const MAX_CONCURRENT = 50;
+const MAX_QUEUED = 1000;
+const CONFIDENCE_LIMIT = 0.8;
 
 let recordCount = 0;
 let geocodingResultCount = 0;

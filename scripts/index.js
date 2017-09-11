@@ -97,6 +97,16 @@ let validAddress = (addressString) => {
     return returnValue;
 }
 
+let validNumber = (houseNumberString) => {
+    // Is valid if it contains anything
+    let returnValue = false;
+    let testString = houseNumberString.trim();
+    if (testString && testString !== "") {
+        returnValue = true;
+    }
+    return returnValue;
+}
+
 reader.on('record', function(record) {
     recordCount++;
 
@@ -184,6 +194,11 @@ reader.on('record', function(record) {
 
         if (!validAddress(jsItem.streetAddress)) {
             logError("Invalid address: " + jsItem.streetAddress, jsItem);
+            return;
+        }
+
+        if (!validNumber(jsItem.houseNumber)) {
+            logError("Invalid house number: " + jsItem.houseNumber, jsItem);
             return;
         }
 

@@ -113,6 +113,7 @@ reader.on('record', function(record) {
         country: "",
         phone: "",
         timestamp: new Date(),
+        serviceArea: [],
         isSocialServiceProvider: false,
         isSocialCareFacility: false,
         isHealthServiceProvider: false,
@@ -170,6 +171,11 @@ reader.on('record', function(record) {
                 }
                 if (attrs.type === "Sos.toimintayksikkö" && item.text === "T") {
                     jsItem.isSocialServiceProvider = true;
+                }
+                if (attrs.type === "ValveriPalveluala" && item.text) {
+                    jsItem.serviceArea = item.text.split(',').map(function(number) {
+                        return parseInt(number, 10);
+                    });
                 }
             }
         }
@@ -231,12 +237,14 @@ reader.on('record', function(record) {
                                 }
                                 amenityString += "clinic";
                             }
+                            // Until we figure out the social_facility type, can't set the amenity key
+                            /*
                             if (jsItem.isSocialCareFacility || jsItem.isSocialServiceProvider) {
                                 if (amenityString.length > 0) {
                                     amenityString += ";";
                                 }
                                 amenityString += "social_facility";
-                            }
+                            }*/
 
                             let xmlObject = {
                                 '@': {
@@ -251,7 +259,7 @@ reader.on('record', function(record) {
                                 { '@': { 'k': 'addr:housenumber', 'v': jsItem.houseNumber } },
                                 { '@': { 'k': 'addr:postcode', 'v': jsItem.postNumber } },
                                 { '@': { 'k': 'oid', 'v': jsItem.oid } },
-                                { '@': { 'k': 'source', 'v': 'THL SOTE orgnisation registry' } },
+                                { '@': { 'k': 'source', 'v': 'THL - SOTE-organisaatiorekisteri' } },
                                 { '@': { 'k': 'addr:country', 'v': jsItem.country } }]
                             };
                             if (amenityString.length > 0) {
@@ -261,7 +269,6 @@ reader.on('record', function(record) {
                                 xmlObject.tag.push({ '@': { 'k': 'phone', 'v': jsItem.phone } });
                             }
                             file.write(Js2XmlParser.parse("node", xmlObject, options) + "\n");
-
                             geocodingResultCount++;
                         }
                     }

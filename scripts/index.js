@@ -13,8 +13,8 @@ const optionDefinitions = [{ name: 'city', type: String, multiple: false, defaul
 const cmdOptions = commandLineArgs(optionDefinitions); 
 console.dir(cmdOptions);
 
-const MAX_CONCURRENT = 50;
-const MAX_QUEUED = 1000;
+const MAX_CONCURRENT = 30;
+const MAX_QUEUED = 5000;
 const CONFIDENCE_LIMIT = 0.8;
 
 let recordCount = 0;
@@ -44,6 +44,14 @@ nodeCleanup((exitCode, signal) => {
 let reader = BigXml.createReader('./input/sote.xml', 'termitementry', { gzip: false });
 
 let requestQueue = new PQueue({ concurrency: MAX_CONCURRENT });
+
+let replaceSpaces = (replaceString, inputString) => {
+    let returnString = "";
+    if(inputString, replaceString) {
+        returnString = inputString.replace(/ /g, replaceString);
+    }
+    return returnString;
+}
 
 let checkIfCitySetAndMatch = (city) => {
     let returnValue = true;
@@ -106,6 +114,8 @@ let validNumber = (houseNumberString) => {
     }
     return returnValue;
 }
+
+
 
 reader.on('record', function(record) {
     recordCount++;

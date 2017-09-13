@@ -90,6 +90,14 @@ let logError = (error, item) => {
     }
 }
 
+let validName = (name) => {
+    let returnValue = false;
+    if (!name.includes("LOPETETTU")) {
+        returnValue = true;
+    }
+    return returnValue;
+}
+
 let validAddress = (addressString) => {
     // Check if this is a post office box address
     let returnValue = false;
@@ -198,6 +206,11 @@ reader.on('record', function(record) {
                     });
                 }
             }
+        }
+
+        if (!validName(jsItem.name)) {
+            logError("Invalid name: " + jsItem.name, jsItem);
+            return;
         }
 
         if (!checkIfCitySetAndMatch(jsItem.postOffice)) return;

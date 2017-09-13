@@ -123,6 +123,14 @@ let validNumber = (houseNumberString) => {
     return returnValue;
 }
 
+let validCity = (cityString) => {
+    let returnString = false;
+    if (cityString && cityString.length > 0) {
+        returnString = true;
+    }
+    return returnString;
+}
+
 
 
 reader.on('record', function(record) {
@@ -222,6 +230,11 @@ reader.on('record', function(record) {
 
         if (!validNumber(jsItem.houseNumber)) {
             logError("Invalid house number: " + jsItem.houseNumber, jsItem);
+            return;
+        }
+
+        if (!validCity(jsItem.postOffice)) {
+            logError("Invalid city: " + jsItem.postOffice, jsItem) 
             return;
         }
 
